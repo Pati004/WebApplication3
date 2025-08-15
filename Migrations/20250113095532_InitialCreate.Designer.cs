@@ -1,0 +1,249 @@
+﻿
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using SmucarskiKlub;
+
+#nullable disable
+
+namespace WebApplication3.Migrations
+{
+    [DbContext(typeof(SmucarskiKlubDbContext))]
+    [Migration("20250113095532_InitialCreate")]
+    partial class InitialCreate
+    {
+  
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        {
+#pragma warning disable 612, 618
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
+
+            modelBuilder.Entity("SmucarskiKlub.Klub", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Ime")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Mesto")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SteviloSmucarjev")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Klubi");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ime = "Triglav",
+                            Mesto = "Krajn",
+                            SteviloSmucarjev = 14
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ime = "Everest",
+                            Mesto = "Zagreb",
+                            SteviloSmucarjev = 3
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Ime = "Mountain",
+                            Mesto = "Rim",
+                            SteviloSmucarjev = 26
+                        });
+                });
+
+            modelBuilder.Entity("SmucarskiKlub.Smucar", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Drzava")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Ime")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("LetoRojstva")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Priimek")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Smucarji");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Drzava = "Nemcija",
+                            Ime = "Blaz",
+                            LetoRojstva = 2010,
+                            Priimek = "Jurkovic"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Drzava = "Austrija",
+                            Ime = "Leo",
+                            LetoRojstva = 2000,
+                            Priimek = "Puncec"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Drzava = "Hrvaska",
+                            Ime = "Ivan",
+                            LetoRojstva = 1918,
+                            Priimek = "Borovickic"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Drzava = "Slovenija",
+                            Ime = "Denis",
+                            LetoRojstva = 1960,
+                            Priimek = "Krajnc"
+                        });
+                });
+
+            modelBuilder.Entity("SmucarskiKlub.SmucarVKlubu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("DoLeta")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("KlubId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("OdLeta")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SmucarId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Tekmovanja")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KlubId");
+
+                    b.HasIndex("SmucarId");
+
+                    b.ToTable("SmucarjiVKlubih");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DoLeta = 2024,
+                            KlubId = 1,
+                            OdLeta = 2021,
+                            SmucarId = 1,
+                            Tekmovanja = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DoLeta = 2020,
+                            KlubId = 2,
+                            OdLeta = 2018,
+                            SmucarId = 1,
+                            Tekmovanja = 42
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DoLeta = 2024,
+                            KlubId = 1,
+                            OdLeta = 2019,
+                            SmucarId = 2,
+                            Tekmovanja = 24
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DoLeta = 2024,
+                            KlubId = 1,
+                            OdLeta = 2023,
+                            SmucarId = 3,
+                            Tekmovanja = 24
+                        },
+                        new
+                        {
+                            Id = 5,
+                            DoLeta = 2021,
+                            KlubId = 3,
+                            OdLeta = 2007,
+                            SmucarId = 3,
+                            Tekmovanja = 6350
+                        },
+                        new
+                        {
+                            Id = 6,
+                            DoLeta = 2024,
+                            KlubId = 3,
+                            OdLeta = 2020,
+                            SmucarId = 4,
+                            Tekmovanja = 23
+                        });
+                });
+
+            modelBuilder.Entity("SmucarskiKlub.SmucarVKlubu", b =>
+                {
+                    b.HasOne("SmucarskiKlub.Klub", "Klub")
+                        .WithMany("Clanstva")
+                        .HasForeignKey("KlubId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmucarskiKlub.Smucar", "Smucar")
+                        .WithMany("ClanstvaVKlubih")
+                        .HasForeignKey("SmucarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Klub");
+
+                    b.Navigation("Smucar");
+                });
+
+            modelBuilder.Entity("SmucarskiKlub.Klub", b =>
+                {
+                    b.Navigation("Clanstva");
+                });
+
+            modelBuilder.Entity("SmucarskiKlub.Smucar", b =>
+                {
+                    b.Navigation("ClanstvaVKlubih");
+                });
+#pragma warning restore 612, 618
+        }
+    }
+}
